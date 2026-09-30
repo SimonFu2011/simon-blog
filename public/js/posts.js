@@ -76,7 +76,7 @@ App.posts = (function () {
     </button>`;
 
   function cardHtml(post, i) {
-    const accent = post.tags && post.tags.length ? post.tags[0].color : '#8A8F6A';
+    const accent = post.tags && post.tags.length ? post.tags[0].color : '#6E7A4F';
     const author = (post.author && post.author.name) || App.config.author;
     const tags = (post.tags || []).map((t) => tagChipHtml(t, state.filter.tag === t.name)).join('');
     const excerpt = App.util.escapeHtml(post.excerpt || '');
@@ -323,7 +323,7 @@ App.posts = (function () {
       state.detail.set(post.id, detail);
       full.innerHTML = App.util.textToParagraphs(detail.body);
     } catch (err) {
-      full.innerHTML = `<p style="color:#F0B69C;font-family:var(--font-mono);font-size:12px;text-indent:0">
+      full.innerHTML = `<p style="color:#7A3418;font-family:var(--font-mono);font-size:12px;text-indent:0">
         正文加载失败：${App.util.escapeHtml(err.message)}</p>`;
     }
   }

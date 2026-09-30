@@ -2,7 +2,8 @@
 
 > 认可一种善并加以实行，认定一种恶并加以否认，用恶行对抗恶行并取胜，我们和我们的敌人是同类，最后我们也应该自戕。
 
-一个**前后端分离**的单人博客：解构主义 + 废土视觉（参考《明日方舟》UI 语言），
+一个**前后端分离**的单人博客：解构主义 + 废土视觉（参考《明日方舟》UI 语言）。
+配色为**米白纸感底 + 深绿主色**，掺入卡其与棕，深绿粗边框配硬阴影，
 原生 HTML / CSS / JS 前端（单页、无框架、无打包），Node.js + Express 后端，SQLite 文件型数据库。
 
 ```
@@ -172,7 +173,7 @@ CREATE TABLE post_tags (
 | 博客名 / 作者 / 编号 | `public/index.html` 文案 + `server/index.js` 的 `AUTHOR`（或用环境变量） |
 | 端口 / 数据文件位置 | 环境变量 `PORT`、`HOST`、`BLOG_DB`、`BLOG_DATA_DIR`、`BLOG_SEED=0`（跳过示例数据） |
 | 转场时长 | `public/js/config.js` → `transition`（默认总时长 1120ms，满足 < 1.2s 要求） |
-| 配色 / 切角尺寸 / 字体 | `public/css/tokens.css` 顶部的 CSS 变量（`--khaki`、`--red`、`--cut`、`--hard`…） |
+| 配色 / 切角尺寸 / 字体 | `public/css/tokens.css` 顶部的 CSS 变量（`--paper`、`--green`、`--khaki`、`--brown`、`--cut`、`--hard`…） |
 | 标签集合 | `server/db.js` → `TAG_PRESET`（改完删掉 `data/blog.db` 重启即可重建） |
 
 字体：正文 `Noto Serif SC`，标题 `Noto Sans SC 900`（超粗黑体），辅助信息 `JetBrains Mono`，

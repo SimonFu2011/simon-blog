@@ -62,8 +62,8 @@
 
     console.info(
       `%c SF-001 %c ${App.config.blog} 已就绪 · 入场页模式 · 向下滚动进入主站`,
-      'background:#C4552E;color:#180C07;font-weight:700',
-      'color:#A79B7E'
+      'background:#24361F;color:#F7F2E7;font-weight:700',
+      'color:#6E7A4F'
     );
   }
 

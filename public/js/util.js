@@ -175,7 +175,7 @@ App.util = (function () {
     if (!needle) return safe;
     const q = escapeHtml(needle).replace(/[.*+?^${}()|[\]\\]/g, '\\$&');
     try {
-      return safe.replace(new RegExp(q, 'gi'), (m) => `<mark style="background:#C4552E;color:#180C07">${m}</mark>`);
+      return safe.replace(new RegExp(q, 'gi'), (m) => `<mark style="background:#3E5A33;color:#F7F2E7">${m}</mark>`);
     } catch (err) {
       return safe;
     }

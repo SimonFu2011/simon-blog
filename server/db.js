@@ -26,12 +26,12 @@ const DB_FILE = process.env.BLOG_DB
 
 /** 固定标签集合（名称 + 主题色，取自废土色板） */
 const TAG_PRESET = [
-  { name: '日常', color: '#8A8F6A' },
-  { name: '文学', color: '#C4552E' },
-  { name: '音乐', color: '#2F7E8C' },
-  { name: '艺术', color: '#A8823C' },
-  { name: '随笔', color: '#6B6459' },
-  { name: '影像', color: '#3F5138' },
+  { name: '日常', color: '#6E7A4F' },
+  { name: '文学', color: '#7A4A2E' },
+  { name: '音乐', color: '#2F5E4C' },
+  { name: '艺术', color: '#8A6A2A' },
+  { name: '随笔', color: '#5F5647' },
+  { name: '影像', color: '#33512B' },
 ];
 
 /** 示例文章的时间：相对"现在"的偏移（保证归档时间线新鲜且永远位于过去） */
@@ -151,7 +151,7 @@ function migrate(handle) {
     CREATE TABLE IF NOT EXISTS tags (
       id    INTEGER PRIMARY KEY AUTOINCREMENT,
       name  TEXT    NOT NULL UNIQUE,
-      color TEXT    NOT NULL DEFAULT '#8A8F6A'
+      color TEXT    NOT NULL DEFAULT '#6E7A4F'
     );
 
     CREATE TABLE IF NOT EXISTS post_tags (
