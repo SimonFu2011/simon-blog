@@ -1,0 +1,524 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<meta name="theme-color" content="#1E1B17">
+<meta name="description" content="Simon Fu 的个人博客 —— 解构主义 / 废土 UI。认可一种善并加以实行，认定一种恶并加以否认。">
+<title>Simon Fu的博客 · SF-001</title>
+
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Noto+Sans+SC:wght@400;700;900&family=Noto+Serif+SC:wght@400;600;700;900&family=JetBrains+Mono:wght@400;700&display=swap" rel="stylesheet">
+
+<link rel="stylesheet" href="css/tokens.css">
+<link rel="stylesheet" href="css/landing.css">
+<link rel="stylesheet" href="css/site.css">
+<link rel="stylesheet" href="css/player.css">
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Crect width='32' height='32' fill='%231E1B17'/%3E%3Cpath d='M16 4l10 6v12l-10 6-10-6V10z' fill='none' stroke='%23C4552E' stroke-width='2'/%3E%3Cpath d='M16 11l5 3v6l-5 3-5-3v-6z' fill='%23A79B7E'/%3E%3C/svg%3E">
+</head>
+<body class="is-landing" data-view="landing">
+
+<!-- ==================== 全站背景层（视差） ==================== -->
+<div class="bgfx" id="bgfx" aria-hidden="true">
+  <div class="bgfx__slab bgfx__slab--a" data-depth="30"></div>
+  <div class="bgfx__slab bgfx__slab--b" data-depth="18"></div>
+  <div class="bgfx__slab bgfx__slab--c" data-depth="44"></div>
+  <div class="bgfx__slab bgfx__slab--d" data-depth="12"></div>
+  <div class="bgfx__hex bgfx__hex--1" data-depth="58"></div>
+  <div class="bgfx__hex bgfx__hex--2" data-depth="72"></div>
+  <div class="bgfx__hex bgfx__hex--3" data-depth="38"></div>
+  <div class="bgfx__rail bgfx__rail--v" data-depth="22"></div>
+  <div class="bgfx__rail bgfx__rail--h" data-depth="16"></div>
+  <div class="bgfx__grid" data-depth="9"></div>
+  <div class="bgfx__stripes" data-depth="26"></div>
+</div>
+<div class="fx-noise" aria-hidden="true"></div>
+<div class="fx-scanlines" aria-hidden="true"></div>
+<div class="fx-vignette" aria-hidden="true"></div>
+
+<!-- 转场扫描线 -->
+<div class="sweep" id="sweep" aria-hidden="true"><i class="sweep__bar"></i><i class="sweep__glow"></i></div>
+<!-- 转场白色闪帧 -->
+<div class="flash" id="flash" aria-hidden="true"></div>
+
+<a class="skiplink" href="#stream">跳转到文章列表</a>
+
+<!-- ==================== 入场页 ==================== -->
+<main class="landing" id="landing" aria-label="入场页">
+  <div class="landing__frame" aria-hidden="true">
+    <span class="landing__corner landing__corner--tl"></span>
+    <span class="landing__corner landing__corner--tr"></span>
+    <span class="landing__corner landing__corner--bl"></span>
+    <span class="landing__corner landing__corner--br"></span>
+  </div>
+
+  <div class="landing__ticker" aria-hidden="true">
+    <span class="ticker__tag">SYS</span>
+    <span class="ticker__text">// 记忆体完整性 92% · 档案库 SF-001 · 解构主义界面协议已加载 · 废土渲染管线 ONLINE</span>
+    <span class="ticker__idx mono">01 / 02</span>
+  </div>
+
+  <div class="landing__grid">
+    <!-- 破碎拼贴头像 -->
+    <div class="idcard" data-fly="left" data-fly-x="-120" data-fly-y="60" data-fly-rot="-14">
+      <div class="avatar" id="avatar" role="img" aria-label="由十二块几何碎片拼成的破碎拼贴头像">
+        <svg class="avatar__svg" viewBox="-24 -24 248 248" xmlns="http://www.w3.org/2000/svg">
+          <defs>
+            <clipPath id="hexClip">
+              <polygon points="100,4 186,52 186,148 100,196 14,148 14,52"></polygon>
+            </clipPath>
+            <linearGradient id="shardSheen" x1="0" y1="0" x2="1" y2="1">
+              <stop offset="0" stop-color="#EDE7D8" stop-opacity="0.16"></stop>
+              <stop offset="1" stop-color="#14120F" stop-opacity="0.28"></stop>
+            </linearGradient>
+          </defs>
+
+          <g clip-path="url(#hexClip)">
+            <rect x="-24" y="-24" width="248" height="248" fill="#241F1B"></rect>
+            <g class="shards">
+              <polygon class="shard" style="--dx:5px;--dy:-9px;--rot:-3deg;--d:0ms"    points="100,4 14,52 60,80 100,60"      fill="#2A2521"></polygon>
+              <polygon class="shard" style="--dx:5px;--dy:-9px;--rot:2deg;--d:20ms"     points="100,4 100,60 140,80 186,52"     fill="#6B6459"></polygon>
+              <polygon class="shard" style="--dx:9px;--dy:-1px;--rot:-2deg;--d:40ms"    points="186,52 140,80 140,130 186,148"  fill="#A79B7E"></polygon>
+              <polygon class="shard" style="--dx:5px;--dy:9px;--rot:3deg;--d:60ms"      points="186,148 140,130 100,150 100,196" fill="#3F5138"></polygon>
+              <polygon class="shard" style="--dx:-5px;--dy:9px;--rot:-3deg;--d:80ms"    points="100,196 100,150 60,130 14,148"  fill="#8C5A34"></polygon>
+              <polygon class="shard" style="--dx:-9px;--dy:-1px;--rot:2deg;--d:100ms"   points="14,148 60,130 60,80 14,52"      fill="#4A443B"></polygon>
+              <polygon class="shard" style="--dx:4px;--dy:-8px;--rot:4deg;--d:60ms"     points="100,60 140,80 100,108"          fill="#C9C3B4"></polygon>
+              <polygon class="shard" style="--dx:9px;--dy:-1px;--rot:-4deg;--d:80ms"    points="140,80 140,130 100,108"         fill="#2F3B2C"></polygon>
+              <polygon class="shard" style="--dx:5px;--dy:8px;--rot:3deg;--d:100ms"     points="140,130 100,150 100,108"        fill="#EDE7D8"></polygon>
+              <polygon class="shard" style="--dx:-5px;--dy:8px;--rot:-3deg;--d:120ms"   points="100,150 60,130 100,108"         fill="#8A8F6A"></polygon>
+              <polygon class="shard" style="--dx:-9px;--dy:-1px;--rot:4deg;--d:140ms"   points="60,130 60,80 100,108"           fill="#7A4A2E"></polygon>
+              <polygon class="shard" style="--dx:-4px;--dy:-8px;--rot:-4deg;--d:160ms"  points="60,80 100,60 100,108"           fill="#3A322A"></polygon>
+            </g>
+            <rect class="avatar__sheen" x="-24" y="-24" width="248" height="248" fill="url(#shardSheen)"></rect>
+            <g class="avatar__grid" stroke="#EDE7D8" stroke-opacity="0.12" stroke-width="0.6">
+              <path d="M-24 40H224M-24 80H224M-24 120H224M-24 160H224M40 -24V224M80 -24V224M120 -24V224M160 -24V224"></path>
+            </g>
+          </g>
+
+          <!-- 细科技线 + 刻度 -->
+          <polygon class="avatar__outline" points="100,4 186,52 186,148 100,196 14,148 14,52" fill="none" stroke="#C9C3B4" stroke-opacity="0.5" stroke-width="1.4"></polygon>
+          <polygon class="avatar__outline avatar__outline--in" points="100,34 158,68 158,132 100,166 42,132 42,68" fill="none" stroke="#C4552E" stroke-opacity="0.45" stroke-width="0.8" stroke-dasharray="6 4"></polygon>
+          <path class="avatar__cross" d="M100 -18V-6M100 206V194M-18 100H-6M206 100H194" stroke="#2F7E8C" stroke-width="1.4"></path>
+
+          <!-- 飞散的游离碎片 -->
+          <g class="debris">
+            <polygon class="shard shard--debris" style="--dx:-16px;--dy:-12px;--rot:-24deg;--d:120ms" points="8,26 22,18 16,36" fill="#C4552E"></polygon>
+            <polygon class="shard shard--debris" style="--dx:18px;--dy:-14px;--rot:30deg;--d:150ms"  points="192,24 206,32 188,40" fill="#2F7E8C"></polygon>
+            <polygon class="shard shard--debris" style="--dx:20px;--dy:14px;--rot:-18deg;--d:180ms"  points="196,168 210,176 190,184" fill="#EDE7D8"></polygon>
+            <polygon class="shard shard--debris" style="--dx:-18px;--dy:16px;--rot:22deg;--d:210ms"  points="4,168 18,158 14,180" fill="#8A8F6A"></polygon>
+            <polygon class="shard shard--debris" style="--dx:6px;--dy:-20px;--rot:12deg;--d:240ms"   points="104,-16 118,-10 102,-2" fill="#A79B7E"></polygon>
+          </g>
+        </svg>
+        <div class="avatar__scan" aria-hidden="true"></div>
+      </div>
+
+      <div class="idcard__meta">
+        <span class="idcard__id mono">ID: <b>SF-001</b></span>
+        <span class="idcard__sep" aria-hidden="true">◆</span>
+        <span class="idcard__status mono"><i class="pulse"></i>ONLINE</span>
+      </div>
+      <div class="idcard__bars" aria-hidden="true"><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i></div>
+    </div>
+
+    <!-- 标题区 -->
+    <div class="hero">
+      <p class="kicker" data-fly="up" data-fly-x="0" data-fly-y="-90" data-fly-rot="4">
+        <span class="kicker__bracket" aria-hidden="true">[</span>
+        PERSONAL ARCHIVE / DECONSTRUCTION × WASTELAND
+        <span class="kicker__bracket" aria-hidden="true">]</span>
+      </p>
+
+      <h1 class="brand" id="landingBrand" data-text="Simon Fu的博客"
+          data-fly="up" data-fly-x="40" data-fly-y="-140" data-fly-rot="-6">Simon Fu的博客</h1>
+
+      <div class="brand__rule" aria-hidden="true">
+        <span class="rule-line"></span>
+        <span class="rule-hex"></span>
+        <span class="rule-line rule-line--short"></span>
+        <span class="rule-num mono">NO. SF-001</span>
+      </div>
+
+      <blockquote class="creed" data-fly="up" data-fly-x="-60" data-fly-y="-60" data-fly-rot="2">
+        <p>认可一种善并加以实行，认定一种恶并加以否认，用恶行对抗恶行并取胜，我们和我们的敌人是同类，最后我们也应该自戕。</p>
+        <cite class="mono">— 信条 / CREED</cite>
+      </blockquote>
+
+      <div class="legend" data-fly="up" data-fly-x="20" data-fly-y="-40" data-fly-rot="0">
+        <span class="legend__item"><i style="--c:#C4552E"></i>解构</span>
+        <span class="legend__item"><i style="--c:#2F7E8C"></i>废土</span>
+        <span class="legend__item"><i style="--c:#8A8F6A"></i>手记</span>
+        <span class="legend__item"><i style="--c:#EDE7D8"></i>影像</span>
+      </div>
+    </div>
+  </div>
+
+  <!-- 向下滚动提示 -->
+  <button class="scroller" id="enterBtn" type="button"
+          data-fly="down" data-fly-x="0" data-fly-y="180" data-fly-rot="8"
+          aria-label="向下滚动进入主站">
+    <span class="scroller__line" aria-hidden="true"></span>
+    <span class="scroller__text">向下滚动 · 进入主站</span>
+    <span class="scroller__arrow" aria-hidden="true">
+      <svg viewBox="0 0 24 24" width="20" height="20" fill="none" stroke="currentColor" stroke-width="2.2">
+        <path d="M12 4v14M6 13l6 6 6-6"></path>
+      </svg>
+    </span>
+    <span class="scroller__hint mono">SCROLL / ENTER / SPACE / ↓</span>
+  </button>
+</main>
+
+<!-- ==================== 主站 ==================== -->
+<div class="site" id="site" hidden>
+  <header class="topbar" id="topbar">
+    <div class="topbar__brand">
+      <span class="hexlogo" aria-hidden="true">
+        <svg viewBox="0 0 32 32" width="30" height="30">
+          <polygon points="16,2 29,9.5 29,22.5 16,30 3,22.5 3,9.5" fill="none" stroke="#A79B7E" stroke-width="1.6"></polygon>
+          <polygon points="16,9 23,13 23,19.5 16,23 9,19.5 9,13" fill="#C4552E" opacity="0.85"></polygon>
+        </svg>
+      </span>
+      <span class="topbar__names">
+        <b class="topbar__name">Simon Fu的博客</b>
+        <span class="topbar__sub mono">SF-001 / ARCHIVE TERMINAL</span>
+      </span>
+    </div>
+
+    <nav class="topbar__nav" aria-label="站内导航">
+      <button type="button" class="navbtn" data-goto="#colLeft">档案</button>
+      <button type="button" class="navbtn" data-goto="#stream">文章</button>
+      <button type="button" class="navbtn" data-goto="#colRight">统计</button>
+    </nav>
+
+    <div class="topbar__actions">
+      <label class="search">
+        <svg viewBox="0 0 24 24" width="15" height="15" fill="none" stroke="currentColor" stroke-width="2.2" aria-hidden="true">
+          <circle cx="11" cy="11" r="7"></circle><path d="M20 20l-4-4"></path>
+        </svg>
+        <input type="search" id="searchInput" placeholder="检索标题 / 正文" aria-label="检索文章">
+      </label>
+      <button type="button" class="btn btn--accent" id="newPostBtn">
+        <svg viewBox="0 0 24 24" width="15" height="15" fill="none" stroke="currentColor" stroke-width="2.6" aria-hidden="true"><path d="M12 5v14M5 12h14"></path></svg>
+        新帖
+      </button>
+      <button type="button" class="btn btn--ghost" id="coverBtn" title="返回入场页（音乐不会中断）">
+        <svg viewBox="0 0 24 24" width="15" height="15" fill="none" stroke="currentColor" stroke-width="2.2" aria-hidden="true"><path d="M4 5h16v14H4z"></path><path d="M4 9h16M9 5v4"></path></svg>
+        封面
+      </button>
+    </div>
+  </header>
+
+  <div class="statusbar" aria-hidden="true">
+    <span class="statusbar__dot"></span>
+    <span class="mono" id="statusText">SYSTEM ONLINE · 正在同步档案…</span>
+    <span class="statusbar__stripes"></span>
+    <span class="mono statusbar__clock" id="statusClock">--:--:--</span>
+  </div>
+
+  <div class="grid" id="grid">
+    <!-- ============ 左栏：个人资料 + 标签云 ============ -->
+    <aside class="col col--left" id="colLeft" data-col="left">
+      <section class="panel panel--cut tilt" aria-labelledby="h-profile">
+        <header class="panel__head">
+          <span class="panel__num mono">01</span>
+          <h2 class="panel__title" id="h-profile">个人档案</h2>
+          <span class="panel__tag mono">PROFILE</span>
+        </header>
+        <div class="panel__body">
+          <div class="profile">
+            <div class="profile__ava" aria-hidden="true">
+              <svg viewBox="-12 -12 224 224" width="100%" height="100%">
+                <polygon points="100,4 186,52 186,148 100,196 14,148 14,52" fill="#2A2521" stroke="#A79B7E" stroke-width="1.4"></polygon>
+                <polygon points="100,4 186,52 100,100 14,52" fill="#3A322A"></polygon>
+                <polygon points="14,52 100,100 100,196 14,148" fill="#6B6459"></polygon>
+                <polygon points="186,52 186,148 100,196 100,100" fill="#8A8F6A"></polygon>
+                <polygon points="100,60 132,78 132,116 100,134 68,116 68,78" fill="#C4552E" opacity="0.9"></polygon>
+                <polygon points="100,74 120,85 120,108 100,119 80,108 80,85" fill="#EDE7D8" opacity="0.85"></polygon>
+              </svg>
+            </div>
+            <div class="profile__info">
+              <h3 class="profile__name">Simon Fu</h3>
+              <p class="profile__role mono">ID: SF-001 · 单人博客</p>
+              <p class="profile__status mono"><i class="pulse"></i>ONLINE / 可接收讯息</p>
+            </div>
+          </div>
+
+          <p class="profile__bio">
+            写字的地方。收纳日常、文学、音乐、艺术、随笔与影像六类碎片，
+            以解构的方式重新拼贴。这里没有评论区，也没有算法。
+          </p>
+
+          <dl class="facts">
+            <div class="facts__row"><dt class="mono">坐标</dt><dd>东八区 · 夜间活动</dd></div>
+            <div class="facts__row"><dt class="mono">媒介</dt><dd>文字 / 声音 / 影像</dd></div>
+            <div class="facts__row"><dt class="mono">状态</dt><dd id="factPosts">— 篇文章在库</dd></div>
+          </dl>
+
+          <div class="hexmeter" aria-hidden="true">
+            <span class="hexmeter__label mono">SYNC</span>
+            <span class="hexmeter__cells"><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i></span>
+          </div>
+        </div>
+      </section>
+
+      <section class="panel panel--cut tilt" aria-labelledby="h-tags">
+        <header class="panel__head">
+          <span class="panel__num mono">02</span>
+          <h2 class="panel__title" id="h-tags">标签云</h2>
+          <span class="panel__tag mono">TAGS</span>
+        </header>
+        <div class="panel__body">
+          <div class="tagcloud" id="tagCloud">
+            <span class="skeleton skeleton--chip"></span>
+            <span class="skeleton skeleton--chip"></span>
+            <span class="skeleton skeleton--chip"></span>
+          </div>
+          <button type="button" class="tagreset" id="tagReset" hidden>× 清除筛选 · 显示全部</button>
+          <p class="panel__note mono">点击标签筛选文章</p>
+        </div>
+      </section>
+    </aside>
+
+    <!-- ============ 中栏：文章流 ============ -->
+    <section class="col col--center" id="colCenter" data-col="center">
+      <header class="sitehero panel--cut tilt-reset">
+        <div class="sitehero__left">
+          <p class="kicker kicker--sm mono">// MAIN ARCHIVE · 文章流</p>
+          <h1 class="sitebrand" id="siteBrand" data-text="Simon Fu的博客">Simon Fu的博客</h1>
+          <p class="sitehero__creed">认可一种善并加以实行，认定一种恶并加以否认，用恶行对抗恶行并取胜，我们和我们的敌人是同类，最后我们也应该自戕。</p>
+        </div>
+        <div class="sitehero__right mono" aria-hidden="true">
+          <span>LAT 30.27</span><span>LON 120.15</span><span>REV 1.0.0</span>
+        </div>
+      </header>
+
+      <div class="streambar">
+        <h2 class="streambar__title" id="streamTitle">全部文章</h2>
+        <span class="streambar__count mono" id="streamCount">—</span>
+        <span class="streambar__filter mono" id="streamFilter" hidden></span>
+      </div>
+
+      <div class="stream" id="stream" aria-busy="true">
+        <article class="post post--skeleton" aria-hidden="true">
+          <div class="skeleton skeleton--line skeleton--title"></div>
+          <div class="skeleton skeleton--line"></div>
+          <div class="skeleton skeleton--line"></div>
+          <div class="skeleton skeleton--line skeleton--short"></div>
+        </article>
+        <article class="post post--skeleton" aria-hidden="true">
+          <div class="skeleton skeleton--line skeleton--title"></div>
+          <div class="skeleton skeleton--line"></div>
+          <div class="skeleton skeleton--line skeleton--short"></div>
+        </article>
+      </div>
+
+      <div class="stream__state" id="streamState" hidden></div>
+    </section>
+
+    <!-- ============ 右栏：统计 ============ -->
+    <aside class="col col--right" id="colRight" data-col="right">
+      <section class="panel panel--cut tilt" aria-labelledby="h-stats">
+        <header class="panel__head">
+          <span class="panel__num mono">03</span>
+          <h2 class="panel__title" id="h-stats">数据统计</h2>
+          <span class="panel__tag mono">STATS</span>
+        </header>
+        <div class="panel__body">
+          <div class="stats" id="statsGrid">
+            <div class="stat">
+              <span class="stat__num mono" id="statPosts">--</span>
+              <span class="stat__label">文章总数</span>
+            </div>
+            <div class="stat">
+              <span class="stat__num mono" id="statChars">--</span>
+              <span class="stat__label">累计字数</span>
+            </div>
+            <div class="stat">
+              <span class="stat__num mono" id="statTags">--</span>
+              <span class="stat__label">标签数量</span>
+            </div>
+            <div class="stat">
+              <span class="stat__num mono stat__num--date" id="statLatest">--</span>
+              <span class="stat__label">最近更新</span>
+            </div>
+          </div>
+
+          <div class="bars" id="tagBars" aria-label="标签分布"></div>
+
+          <div class="years" id="yearBars" aria-label="年度归档"></div>
+        </div>
+      </section>
+
+      <section class="panel panel--cut tilt" aria-labelledby="h-sys">
+        <header class="panel__head">
+          <span class="panel__num mono">04</span>
+          <h2 class="panel__title" id="h-sys">运行状态</h2>
+          <span class="panel__tag mono">SYSTEM</span>
+        </header>
+        <div class="panel__body">
+          <ul class="syslist mono" id="sysList">
+            <li><span>前端</span><b>原生 HTML / CSS / JS</b></li>
+            <li><span>后端</span><b>Node.js + Express</b></li>
+            <li><span>数据库</span><b>SQLite (node:sqlite)</b></li>
+            <li><span>接口</span><b id="sysApi">检测中…</b></li>
+            <li><span>服务器时间</span><b id="sysClock">--:--:--</b></li>
+          </ul>
+          <div class="sysbtns">
+            <button type="button" class="btn btn--ghost btn--wide" id="refreshBtn">↻ 重新同步数据</button>
+          </div>
+        </div>
+      </section>
+    </aside>
+  </div>
+
+  <footer class="foot">
+    <span class="mono">© <span id="footYear">2025</span> SIMON FU · SF-001</span>
+    <span class="foot__sep" aria-hidden="true">/</span>
+    <span class="mono">DECONSTRUCTION × WASTELAND UI</span>
+    <span class="foot__sep" aria-hidden="true">/</span>
+    <span class="mono">POWERED BY EXPRESS + SQLITE</span>
+  </footer>
+</div>
+
+<!-- ==================== 音乐播放器（独立浮窗，切页不中断） ==================== -->
+<section class="player" id="player" aria-label="音乐播放器">
+  <div class="player__head" id="playerHead">
+    <span class="player__grip" aria-hidden="true">
+      <svg viewBox="0 0 16 16" width="12" height="12" fill="currentColor"><circle cx="4" cy="4" r="1.3"/><circle cx="9" cy="4" r="1.3"/><circle cx="4" cy="9" r="1.3"/><circle cx="9" cy="9" r="1.3"/><circle cx="4" cy="14" r="1.3"/><circle cx="9" cy="14" r="1.3"/></svg>
+    </span>
+    <span class="player__label mono">AUDIO UNIT / <b id="plIndex">01</b></span>
+    <span class="player__headcount mono" id="plHeadTitle">待机</span>
+    <button type="button" class="iconbtn" id="plMin" aria-label="最小化播放器" aria-expanded="true" title="最小化 / 展开">
+      <svg viewBox="0 0 24 24" width="15" height="15" fill="none" stroke="currentColor" stroke-width="2.6"><path d="M5 12h14"></path></svg>
+    </button>
+  </div>
+
+  <div class="player__body" id="playerBody">
+    <div class="player__now">
+      <div class="player__cover" id="plCover" aria-hidden="true">
+        <svg viewBox="0 0 48 48" width="100%" height="100%"><polygon points="24,3 44,14 44,34 24,45 4,34 4,14" fill="#2A2521" stroke="#A79B7E" stroke-width="1.2"></polygon><polygon points="24,12 36,18.5 36,29.5 24,36 12,29.5 12,18.5" fill="#C4552E" opacity="0.9"></polygon><circle cx="24" cy="24" r="4" fill="#1E1B17"></circle></svg>
+      </div>
+      <div class="player__meta">
+        <p class="player__title" id="plTitle">未选择曲目</p>
+        <p class="player__artist mono" id="plArtist">点按播放开始 · 不自动播放</p>
+      </div>
+    </div>
+
+    <div class="player__viz" id="plViz" aria-hidden="true">
+      <i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i>
+    </div>
+
+    <div class="player__seek">
+      <span class="mono" id="plCur">00:00</span>
+      <input type="range" id="plSeek" min="0" max="1000" value="0" step="1" aria-label="播放进度" aria-valuetext="0%">
+      <span class="mono" id="plDur">00:00</span>
+    </div>
+
+    <div class="player__controls">
+      <button type="button" class="pbtn" id="plPrev" aria-label="上一首" title="上一首（←）">
+        <svg viewBox="0 0 24 24" width="18" height="18" fill="currentColor"><path d="M7 5h2.4v14H7zM19 5v14L9.6 12z"></path></svg>
+      </button>
+      <button type="button" class="pbtn pbtn--main" id="plToggle" aria-label="播放" title="播放 / 暂停（空格）">
+        <svg viewBox="0 0 24 24" width="20" height="20" fill="currentColor" id="plToggleIcon"><path d="M7 4.5l13 7.5-13 7.5z"></path></svg>
+      </button>
+      <button type="button" class="pbtn" id="plNext" aria-label="下一首" title="下一首（→）">
+        <svg viewBox="0 0 24 24" width="18" height="18" fill="currentColor"><path d="M14.6 5H17v14h-2.4zM5 5v14l9.4-7z"></path></svg>
+      </button>
+      <div class="player__vol">
+        <button type="button" class="pbtn pbtn--sm" id="plMute" aria-label="静音" title="静音">
+          <svg viewBox="0 0 24 24" width="16" height="16" fill="currentColor"><path d="M4 9h3.5L12 5v14l-4.5-4H4z"></path><path d="M15.5 9.2a4 4 0 010 5.6l1.2 1.2a5.7 5.7 0 000-8z"></path></svg>
+        </button>
+        <input type="range" id="plVol" min="0" max="100" value="70" step="1" aria-label="音量">
+      </div>
+      <button type="button" class="pbtn pbtn--sm" id="plListToggle" aria-label="显示歌单" aria-expanded="false" title="歌单">
+        <svg viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor" stroke-width="2.4"><path d="M4 7h16M4 12h16M4 17h10"></path></svg>
+      </button>
+    </div>
+
+    <ol class="player__list" id="plList" hidden></ol>
+    <p class="player__status mono" id="plStatus">待机 · 点击播放按钮开始</p>
+  </div>
+
+  <audio id="audio" preload="none"></audio>
+</section>
+
+<!-- ==================== 新帖 / 编辑 对话框 ==================== -->
+<dialog class="dlg dlg--composer" id="composerDialog" aria-labelledby="composerTitle">
+  <form method="dialog" class="dlg__form" id="composerForm" novalidate>
+    <header class="dlg__head">
+      <span class="dlg__num mono" id="composerNum">NEW</span>
+      <h2 class="dlg__title" id="composerTitle">撰写新帖</h2>
+      <button type="button" class="iconbtn" id="composerClose" aria-label="关闭">
+        <svg viewBox="0 0 24 24" width="15" height="15" fill="none" stroke="currentColor" stroke-width="2.6"><path d="M6 6l12 12M18 6L6 18"></path></svg>
+      </button>
+    </header>
+
+    <div class="dlg__body">
+      <label class="field">
+        <span class="field__label mono">标题 / TITLE <em>*</em></span>
+        <input type="text" id="fTitle" name="title" maxlength="120" required autocomplete="off"
+               placeholder="给这篇文章一个名字…">
+      </label>
+
+      <fieldset class="field">
+        <legend class="field__label mono">标签 / TAGS <em>可多选</em></legend>
+        <div class="chips" id="fTags"></div>
+      </fieldset>
+
+      <label class="field">
+        <span class="field__label mono">正文 / BODY <em>*</em></span>
+        <textarea id="fBody" name="body" rows="12" required
+                  placeholder="在这里写字。空行分段，纯文本即可…"></textarea>
+        <span class="field__counter mono"><b id="fCount">0</b> 字符</span>
+      </label>
+
+      <p class="dlg__error mono" id="composerError" hidden></p>
+    </div>
+
+    <footer class="dlg__foot">
+      <span class="dlg__hint mono">Ctrl/⌘ + Enter 保存 · Esc 取消</span>
+      <div class="dlg__actions">
+        <button type="button" class="btn btn--ghost" id="composerCancel">取消</button>
+        <button type="submit" class="btn btn--accent" id="composerSubmit">保存并发布</button>
+      </div>
+    </footer>
+  </form>
+</dialog>
+
+<!-- ==================== 删除确认对话框 ==================== -->
+<dialog class="dlg dlg--confirm" id="confirmDialog" aria-labelledby="confirmTitle">
+  <div class="dlg__form">
+    <header class="dlg__head dlg__head--warn">
+      <span class="dlg__num mono">!</span>
+      <h2 class="dlg__title" id="confirmTitle">确认删除</h2>
+    </header>
+    <div class="dlg__body">
+      <p class="confirm__text">即将删除文章：</p>
+      <p class="confirm__target" id="confirmTarget">—</p>
+      <p class="confirm__warn mono">此操作不可撤销，数据将从 SQLite 中永久移除。</p>
+    </div>
+    <footer class="dlg__foot">
+      <span class="dlg__hint mono">Esc 取消 · Enter 确认</span>
+      <div class="dlg__actions">
+        <button type="button" class="btn btn--ghost" id="confirmCancel">取消</button>
+        <button type="button" class="btn btn--danger" id="confirmOk">确认删除</button>
+      </div>
+    </footer>
+  </div>
+</dialog>
+
+<!-- ==================== 提示条 ==================== -->
+<div class="toasts" id="toasts" role="status" aria-live="polite"></div>
+
+<script src="js/config.js"></script>
+<script src="js/util.js"></script>
+<script src="js/api.js"></script>
+<script src="js/scramble.js"></script>
+<script src="js/parallax.js"></script>
+<script src="js/player.js"></script>
+<script src="js/posts.js"></script>
+<script src="js/landing.js"></script>
+<script src="js/transition.js"></script>
+<script src="js/app.js"></script>
+</body>
+</html>

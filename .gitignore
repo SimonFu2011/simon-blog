@@ -1,0 +1,12 @@
+# 依赖
+node_modules/
+
+# SQLite 数据库（首次启动自动生成）
+data/*.db
+data/*.db-wal
+data/*.db-shm
+
+# 日志与临时文件
+*.log
+.DS_Store
+Thumbs.db

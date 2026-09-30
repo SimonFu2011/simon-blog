@@ -1,0 +1,26 @@
+{
+  "name": "simon-fu-blog",
+  "version": "1.0.0",
+  "private": true,
+  "description": "Simon Fu 的个人博客 —— 解构主义 / 废土 UI，原生 HTML+CSS+JS 前端 + Express 后端 + SQLite 数据库",
+  "main": "server/index.js",
+  "engines": {
+    "node": ">=22.5.0"
+  },
+  "scripts": {
+    "start": "node server/index.js",
+    "dev": "node --watch server/index.js",
+    "seed": "node server/seed.js",
+    "reset": "node server/seed.js --reset"
+  },
+  "keywords": [
+    "blog",
+    "express",
+    "sqlite",
+    "vanilla-js"
+  ],
+  "license": "MIT",
+  "dependencies": {
+    "express": "^5.1.0"
+  }
+}
